@@ -69,18 +69,16 @@ class ImgController {
       $img->save();
       $id = $img->id();
       $name = "{$id}.{$format}";
-      $upload_dir = '/var/www/dev/src/web/images/';
-      $target = $upload_dir . $name;
+      $target = getcwd() . "/images/{$name}";
       if(!move_uploaded_file($filePath, $target))
       {
         $_SESSION['error'][] = "Błąd podczas ładowania pliku.";
       }
 
-      $upload_dir = '/var/www/dev/src/web/';
-      $watermarkPath = $upload_dir . "watermark/{$id}_watermark.png";
+      $watermarkPath = getcwd() . "/watermark/{$id}_watermark.png";
       generateWatermark($target, $watermarkPath, $format, $watermark);
 
-      $miniPath = $upload_dir . "mini/{$id}_mini.png";
+      $miniPath = getcwd() . "/mini/{$id}_mini.png";
       generateMini($target, $miniPath, $format);
 
     }

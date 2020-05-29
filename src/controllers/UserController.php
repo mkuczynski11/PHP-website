@@ -9,7 +9,7 @@ require_once '../models/User.php';
 class UserController {
 
   public function signup() {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user_id']))
     {
       return new RedirectView('/', 303);
     }
@@ -17,7 +17,7 @@ class UserController {
   }
 
   public function add() {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user_id']))
     {
       return new RedirectView('/', 303);
     }
@@ -75,7 +75,7 @@ class UserController {
   }
 
   public function login() {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user_id']))
     {
       return new RedirectView('/', 303);
     }
@@ -83,7 +83,7 @@ class UserController {
   }
 
   public function verify() {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user_id']))
     {
       return new RedirectView('/', 303);
     }
@@ -93,8 +93,9 @@ class UserController {
     $user = User::find_user(['login' => $login]);
     if($user !== null && password_verify($password, $user['password']))
     {
-      $_SESSION['user'] = $login;
-      return new RedirectView('/login/verified', 303);
+      session_regenerate_id(true);
+      $_SESSION['user_id'] = $user['_id'];
+      return new VerifiedView();
     }
     else
     {
@@ -103,21 +104,10 @@ class UserController {
     }
   }
 
-  public function verified() {
-    if(isset($_SESSION['user']))
-    {
-      return new VerifiedView();
-    }
-    else
-    {
-      return new RedirectView('/', 303);
-    }
-  }
-
   public function signout() {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user_id']))
     {
-      session_unset($_SESSION['user']);
+      session_destroy();
     }
     return new RedirectView('/', 303);
   }

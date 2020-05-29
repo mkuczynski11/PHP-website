@@ -21,8 +21,7 @@
 		</header>
 		<main>
 			<section id="text">
-        <h1>Witaj <?= $_SESSION['user'] ?>!</h1>
-        <p>Jesteś zalogowany!</p>
+        <h1>Jesteś zalogowany!</h1>
 			</section>
 		</main>
 		<?php include 'aside.php'; ?>

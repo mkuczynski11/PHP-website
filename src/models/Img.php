@@ -45,6 +45,15 @@ class Img{
     }
     return $images;
   }
+  static public function get_fav(){
+    $images = [];
+    if(!isset($_SESSION['favourite'])) return $images;
+    foreach($_SESSION['favourite'] as $key => $value){
+      $response = DB::get()->images->findOne(['_id' => new MongoDB\BSON\ObjectID($value)]);
+      array_push($images, static::image_to_display($response));
+    }
+    return $images;
+  }
 
 }
 

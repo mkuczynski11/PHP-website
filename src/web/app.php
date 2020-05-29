@@ -6,7 +6,7 @@ session_start();
 $router = new Router();
 
 $router->get('/img/new', 'ImgController::new');
-$router->get('/imgs', 'ImgController::show');
+$router->get('/images_list', 'ImgController::show');
 $router->post('/img/adding', 'ImgController::add');
 
 $router->get('/signup', 'UserController::signup');
@@ -16,11 +16,10 @@ $router->get('/signout', 'UserController::signout');
 
 $router->get('/login', 'UserController::login');
 $router->post('/login/verify', 'UserController::verify');
-$router->get('/login/verified', 'UserController::verified');
 
 $router->post('/img/new_favourite', 'FavouriteController::add');
-$router->post('/img/remove_favourite', 'FavouriteController::remove');
 $router->get('/imgs/favourite', 'FavouriteController::show');
+$router->post('/imgs/remove_favourite', 'FavouriteController::remove');
 
 $router->get('/', 'StaticController::stronaglowna');
 $router->get('/kibicowanie', 'StaticController::kibicowanie');

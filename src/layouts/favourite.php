@@ -20,9 +20,9 @@
   </header>
   <main>
     <section id="text">
-      <h1 class="title">Galeria zdjęć</h1>
+      <h1 class="title">Ulubione</h1>
       <?php
-				echo "<form action='/img/new_favourite' method='POST'>";
+				echo "<form action='/imgs/remove_favourite' method='POST'>";
         foreach($images as $image)
         {
 					$imgPath = "/images/{$image->id()}.{$image->format}";
@@ -32,23 +32,9 @@
 					echo "<a href=\"{$watermarkPath}\">";
 					echo "<img src=\"{$miniPath}\">";
 					echo "</a> <br>";
-					$checked = "";
-					if(isset($_SESSION['favourite'])){
-						if(in_array($image->id(), $_SESSION['favourite']))
-						{
-							$checked = 'checked';
-						}
-					}
-					echo "Ulubione:<input type='checkbox' name='favourite[]' value='{$image->id()}' {$checked}>";
+					echo "Wybierz:<input type='checkbox' name='remove[]' value='{$image->id()}'>";
         }
-				echo "<br><input type='submit' value ='Dodaj do ulubionych'>";
-				echo "</form>";
-				echo "<form action='/images_list' method='GET'>";
-				echo "<input type='hidden' name='page' value='$page'>";
-				if($page != 1){
-				echo "<input type='submit' name='move' value='before'>";
-				}
-				echo "<input type='submit' name='move' value='next'>";
+				echo "<br><input type='submit' value ='Usuń z ulubionych'>";
 				echo "</form>";
 				if(isset($_SESSION['error'])) {
 	        $string_error = implode(' ',$_SESSION['error']);

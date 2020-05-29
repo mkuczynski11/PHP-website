@@ -25,7 +25,7 @@
       <form action="/login/verify" method="POST">
         Login:<input type="text" name="login" placeholder="Login"> <br>
 				Hasło:<input type="password" name="password" placeholder="Hasło"> <br>
-        <input type="submit" value="Rejestracja">
+        <input type="submit" value="Zaloguj">
       </form>
 			<?php
       if(isset($_SESSION['error'])) {

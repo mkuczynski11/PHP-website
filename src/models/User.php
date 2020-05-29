@@ -2,7 +2,7 @@
 require_once '../DB.php';
 
 class User {
-  private $_id;
+  private $id;
   public $login;
   public $email;
   public $passwordHash;
@@ -31,7 +31,7 @@ class User {
       'email' => $this->email,
       'password' => $this->passwordHash
     ]);
-    $this->_id = $response->getInsertedId();
+    $this->id = $response->getInsertedId();
   }
 
   public static function find_user($query = []) {
